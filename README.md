@@ -19,11 +19,6 @@ Well, you may be surprised that gathering reliable applicable data can be painfu
 Now that I have some data ready to go I can comfortably begin going into the set up and construction of my projects repository and workspace. I’ll post again when I have the beginnings of the project up and running. 
 
 
-## May 14, 2022
- 
-> Got the environment up and running with data, this read me, the libraries I need and the overall structure of the GitHub repo. 
-
-
 
 #### Sources
 

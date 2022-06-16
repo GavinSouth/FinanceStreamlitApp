@@ -5,15 +5,13 @@ import altair as alt
 from PIL import Image
 import streamlit as st 
 
-st.markdown("# Paying this much for gas is crazy...")
-st.sidebar.markdown("# At the pump")
+st.markdown("## You start to wonder if an electric car would be cheaper...")
 
-gas_prices = pd.read_excel('Data/10641_gasoline_prices_by_year_2-22-22.xlsx')
-
+#gas_prices = pd.read_excel('Data/10641_gasoline_prices_by_year_2-22-22.xlsx')
 #st.dataframe(gas_prices.style.highlight_max(axis=0))
 
-st.markdown("## Right now,")
-st.markdown(" you are currently standing at a gas pump. Card swiped, nozzle in hand, and wincing as you select the grade of fuel for your gas. How frustrated and confused are you seeing the prices? You may think this is out of control, gas was 25¢ chaper like three days ago!")
+st.markdown("### Sitting at your computer,")
+st.markdown(" you start finding some summary statistics that can help you make a case for your hypothesis that you may be able to save money by buying an electric car.")
 
 image = Image.open('photos/gas_pump_slim.png')
 st.image(image, caption='')
@@ -52,5 +50,6 @@ d = d.configure_view(strokeWidth=0).configure_axis(grid=False, domain=False)
 
 st.altair_chart(d, use_container_width=True)
 
-st.markdown("And that's not all, you find some of the main economists in the US predicting this price to grow to *$7.00 a gallon by end of year!*")
+st.markdown("And that's not all, you find some of the main economists in the US predicting this price to grow to **$7.00 a gallon by end of year!**")
+st.markdown("")
 

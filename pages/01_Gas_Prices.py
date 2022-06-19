@@ -1,4 +1,5 @@
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
+import base64
 import pandas as pd
 import numpy as np
 import altair as alt
@@ -9,32 +10,41 @@ st.markdown("# Paying this much for gas is crazy...")
 st.sidebar.markdown("# At the pump")
 
 gas_prices = pd.read_excel('Data/10641_gasoline_prices_by_year_2-22-22.xlsx')
+#st.data_frame(gas_prices.style.highlight_max(axis=0))
 
-#st.dataframe(gas_prices.style.highlight_max(axis=0))
+class fuel_stats: 
+    avg_annual_miles = 14263
+    avg_length_of_ownership = 8.4
+    current_diesel = 5.718
+    current_regular = 5.006
+    current_mid = 5.455
+    current_premium = 5.762
 
+# ———————————————————————————————————————————————————————————————————————————————————————————————— #
 st.markdown("## Right now,")
 st.markdown(" you are currently standing at a gas pump. Card swiped, nozzle in hand, and wincing as you select the grade of fuel for your gas. How frustrated and confused are you seeing the prices? You may think this is out of control, gas was 25¢ chaper like three days ago!")
 
 image = Image.open('photos/gas_pump_slim.png')
-st.image(image, caption='')
-            
-image = Image.open('photos/gas_prices_06_09.png')
-st.image(image, caption='Gas prices as of June 9, 2022 https://www.eia.gov/dnav/pet/pet_pri_gnd_dcus_nus_w.htm')
+st.image(image, caption='Gas prices as of June 18, 2022 https://www.eia.gov/dnav/pet/pet_pri_gnd_dcus_nus_w.htm')
+
+col1, col2, col3, col4= st.columns(4)
+col1.metric("Diesel", "$" + str(fuel_stats.current_diesel), str(int((fuel_stats.current_diesel / 3.287) * 100)) + '% since 2021', delta_color="off")
+col2.metric("Regular", "$" + str(fuel_stats.current_regular), str(int((fuel_stats.current_regular / 3.008) * 100)) + '% since 2021', delta_color="off")
+col3.metric("Mid-grade", "$" + str(fuel_stats.current_mid), str(int((fuel_stats.current_mid / 3.432) * 100)) + '% since 2021', delta_color="off")
+col4.metric("Premium", "$" + str(fuel_stats.current_premium), str(int((fuel_stats.current_premium / 3.687) * 100)) + '% since 2021', delta_color="off")
 
 st.markdown("**Wow! Thank goodness** you don't own a large 1-ton diesel truck, that's absolutely **outrageous**! But, you still have to fuel up your ride. After a minute or two your tank is full and you have a large difference in your bank account. You storm away frustrated and sad you can't justify a late night pizza and movie night.") 
-st.markdown("You consider, on the way home you think about how you can start saving money at the pump... want to start riding your bike everywhere? No thanks. You start thinking about your neigbors shiny new electric vehicle they keep raving about to you and all your neighbors. You've been thinking about an upgrade for a while now, maybe this is a good time to see whats out there whats available.")
+st.markdown("You consider, on the way home you think about how you can start saving money at the pump... want to start riding your bike everywhere? No thanks. You start thinking about your neigbors shiny new electric vehicle they keep raving about to you and all your neighbors. You've been thinking about an upgrade for a while now, maybe this is a good time to see whats available out there.")
 st.markdown("")
 
+# ———————————————————————————————————————————————————————————————————————————————————————————————— #
 st.markdown("## Later that day,")
-
 st.markdown("You sit down on your laptop and search for gas prices in America, you want to see if things are really as bad as you think or if your local gas station is just a bad case of gutting locals. You find...")
 
 image = Image.open('photos/gas_increase.png')
 st.image(image, caption='')
         
 # Graph for gas changes over time.    
-c = alt.Chart(gas_prices).mark_line().encode(
-     x='Year', y='Gasoline Price (2020 $/gallon)', tooltip=['Year', 'Gasoline Price (2020 $/gallon)'])
 c = alt.Chart(gas_prices).encode(
     x = alt.X('Year', axis=None),
     y = alt.Y('Gasoline Price (2020 $/gallon)'),
@@ -52,6 +62,80 @@ d = d.configure_view(strokeWidth=0).configure_axis(grid=False, domain=False)
 
 st.altair_chart(d, use_container_width=True)
 
-st.markdown("And that's not all, you find some of the main economists in the US predicting this price to grow to **$7.00 a gallon by end of year!**")
+st.markdown("And that's not all, you find some of the main economists in the US predicting this price to grow to **$7.00** a gallon by end of year! So, you keep doing some research and find there are some interesting statistics that will help you know the average cost of owning a traditional fuel propelled car.")
 st.markdown("")
 
+# ———————————————————————————————————————————————————————————————————————————————————————————————— #
+file_ = open("gifs/stat_search.gif", "rb")
+contents = file_.read()
+data_url = base64.b64encode(contents).decode("utf-8")
+file_.close()
+
+st.markdown(f'<img src="data:image/gif;base64,{data_url}" alt="cat gif">',  unsafe_allow_html=True,)
+st.markdown("")
+st.markdown("")
+
+image = Image.open('photos/gasoline_stats.png')
+st.image(image)
+
+vehicle_type = pd.read_excel('Data/10310_fuel_economy_by_vehicle_type_3-26-20.xlsx')
+#st.dataframe(vehicle_type.style.highlight_max(axis=0))
+
+a = alt.Chart(vehicle_type).encode(
+    x = alt.X('MPG Gasoline:Q', axis=alt.Axis(title='', tickCount=1)),
+    y = alt.Y('Vehicle Type', sort =alt.EncodingSortField(field="x", op="min", order='descending')),
+    tooltip=['Vehicle Type', 'MPG Gasoline']
+).properties(width=700, height=500)
+a = a.mark_circle(color = 'lightgrey', size=200) 
+b = alt.Chart(vehicle_type.query("`Vehicle Type` == 'Car'")).encode(
+    x = alt.X('MPG Gasoline:Q', axis=alt.Axis(title='', tickCount=1)),
+    y = alt.Y('Vehicle Type', sort =alt.EncodingSortField(field="x", op="min", order='descending')),
+    tooltip=['Vehicle Type', 'MPG Gasoline']
+).properties(width=700, height=500)
+b = b.mark_circle(color = 'red', size=400) 
+c = alt.Chart(vehicle_type).encode(
+    x = alt.X('MPG Diesel:Q', axis=alt.Axis(title='', tickCount=1)),
+    y = alt.Y('Vehicle Type', sort=alt.EncodingSortField(field="x", op="min", order='descending')),
+    tooltip=['Vehicle Type', 'MPG Diesel']
+).properties(width=700, height=500)
+c = c.mark_circle(color = 'lightgrey', size=200, opacity = .25) 
+d = alt.Chart(vehicle_type.query("`Vehicle Type` == 'Car'")).encode(
+    x = alt.X('MPG Diesel:Q', axis=alt.Axis(title='', tickCount=1)),
+    y = alt.Y('Vehicle Type', sort=alt.EncodingSortField(field="x", op="min", order='descending')),
+    tooltip=['Vehicle Type', 'MPG Diesel']
+).properties(width=700, height=500)
+d = d.mark_circle(color = 'red', size=300, opacity = .25) 
+
+a = a+b+c+d
+a = a.configure_view(strokeWidth=0).configure_axis(grid=False, domain=False)
+st.altair_chart(a, use_container_width=True)
+
+# ———————————————————————————————————————————————————————————————————————————————————————————————— #
+st.markdown("## Then you crunch the numbers,")
+
+vehicle_type_chart = pd.DataFrame(
+    vehicle_type.assign(**{"Monthly Regular Gas Cost":  "$" + round(((fuel_stats.avg_annual_miles / vehicle_type['MPG Gasoline']) / 12) *fuel_stats.current_regular, 2).astype(str)},
+                        **{"Monthly Mid-Grade Gas Cost":  "$" + round(((fuel_stats.avg_annual_miles / vehicle_type['MPG Gasoline']) / 12) *fuel_stats.current_mid, 2).astype(str)},
+                        **{"Monthly Premium Gas Cost":  "$" + round(((fuel_stats.avg_annual_miles / vehicle_type['MPG Gasoline']) / 12) *fuel_stats.current_premium, 2).astype(str)},
+                        **{"Monthly Diesel Gas Cost": "$" + round(((fuel_stats.avg_annual_miles / vehicle_type['MPG Diesel']) / 12) *fuel_stats.current_diesel, 2).astype(str)},
+                        **{"Yearly Regular Gas Cost":  "$" + round(((fuel_stats.avg_annual_miles / vehicle_type['MPG Gasoline'])) *fuel_stats.current_regular, 2).astype(str)},
+                        **{"Yearly Mid-Grade Gas Cost":  "$" + round(((fuel_stats.avg_annual_miles / vehicle_type['MPG Gasoline'])) *fuel_stats.current_mid, 2).astype(str)},
+                        **{"Yearly Premium Gas Cost":  "$" + round(((fuel_stats.avg_annual_miles / vehicle_type['MPG Gasoline'])) *fuel_stats.current_premium, 2).astype(str)},
+                        **{"Yearly Diesel Gas Cost": "$" + round(((fuel_stats.avg_annual_miles / vehicle_type['MPG Diesel'])) *fuel_stats.current_diesel, 2).astype(str)})
+    .drop(['MPG Gasoline', 'MPG Diesel'], axis=1))
+st.table(vehicle_type_chart)
+
+image = Image.open('photos/personal_car_title.png')
+st.image(image)
+
+image = Image.open('photos/red_car.png')
+st.image(image)
+
+col1, col2, col3, col4= st.columns(4)
+col1.metric("Vehicle Type", "Car", delta_color="off")
+col2.metric("Fuel Type", "Regular", delta_color="off")
+col3.metric("Fuel Economy", "24.2 mpg", delta_color="off")
+col4.metric("Annual Cost for Fuel", "$2,950.44", delta_color="off")
+
+image = Image.open('photos/personal_car_cost.png')
+st.image(image)

@@ -7,7 +7,6 @@ from PIL import Image
 import streamlit as st 
 
 st.markdown("# Paying this much for gas is crazy...")
-st.sidebar.markdown("# At the pump")
 
 gas_prices = pd.read_excel('Data/10641_gasoline_prices_by_year_2-22-22.xlsx')
 #st.data_frame(gas_prices.style.highlight_max(axis=0))

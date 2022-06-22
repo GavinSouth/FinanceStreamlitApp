@@ -61,7 +61,7 @@ d = d.configure_view(strokeWidth=0).configure_axis(grid=False, domain=False)
 
 st.altair_chart(d, use_container_width=True)
 
-st.markdown("And that's not all, you find some of the main economists in the US predicting this price to grow to **$7.00** a gallon by end of year! So, you keep doing some research and find there are some interesting statistics that will help you know the average cost of owning a traditional fuel propelled car.")
+st.markdown("And that's not all, you find some of the influential economists in the US predicting this price to grow to **$7.00** a gallon by end of year! So, you keep doing some research and find some interesting statistics that will help you know the average cost of owning a traditional fuel propelled car.")
 st.markdown("")
 
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
@@ -73,6 +73,8 @@ file_.close()
 st.markdown(f'<img src="data:image/gif;base64,{data_url}" alt="cat gif">',  unsafe_allow_html=True,)
 st.markdown("")
 st.markdown("")
+
+st.markdown("As you keep doing some research you begin fiding some interesting stats that can help you uncover the actual cost of keeping your gasoline powered car on the road. The internet is full of interesting findings and summary statistics here are a few that help draw the bigger picture.")
 
 image = Image.open('photos/gasoline_stats.png')
 st.image(image)
@@ -109,8 +111,12 @@ a = a+b+c+d
 a = a.configure_view(strokeWidth=0).configure_axis(grid=False, domain=False)
 st.altair_chart(a, use_container_width=True)
 
+st.markdown("Plotting the average fuel economy of all the different types of vehicles that are on the road today. Your car that you currently own is sitting happily as the red dot in the bottom portion of the chart. This average along with the other stats discovered will now allow you to run some basic mathematics on the data to compare and contrast your own long term fuel cost against an electric alternative.")
+
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
-st.markdown("## Then you crunch the numbers,")
+st.markdown("## Crunching the numbers,")
+
+st.markdown("Taking the average annual miles, divided by the fuel economy, then multiplied by the current fuel rate you can figure a good idea of the cost to run a certain type of vehicle per month and per year.")
 
 vehicle_type_chart = pd.DataFrame(
     vehicle_type.assign(**{"Monthly Regular Gas Cost":  "$" + round(((fuel_stats.avg_annual_miles / vehicle_type['MPG Gasoline']) / 12) *fuel_stats.current_regular, 2).astype(str)},
@@ -138,3 +144,5 @@ col4.metric("Annual Cost for Fuel", "$2,950.44", delta_color="off")
 
 image = Image.open('photos/personal_car_cost.png')
 st.image(image)
+
+st.markdown("With a short analysis done, and a benchmark to beat, you decide to explore the contrasting electric vehicle alternative.")

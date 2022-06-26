@@ -61,6 +61,29 @@ d = d.configure_view(strokeWidth=0).configure_axis(grid=False, domain=False)
 
 st.altair_chart(d, use_container_width=True)
 
+# Linear regression model for gas prices
+x = gas_prices['Year'].values.reshape(-1, 1)
+y = gas_prices['Gasoline Price ($/gallon)'].values
+model = LinearRegression().fit(x, y)
+
+# model.intercept_
+# model.coef_
+#model.intercept_ + model.coef_ * 365
+
+st.markdown(" Considering the values from your charts, running a linear regression doesn't seems like a logical approach to predicting future costs of both gasoline and electricity. You find the following models:")
+
+st.markdown("**Average electric cost change with time series regression model:**")
+st.markdown("###### $ \hat{Y}_i \ \\text{(Estimated kWh Cost)}\ = " 
+            + str(round(model.intercept_, 2))  + 
+            "\\text{¢} + " 
+            + str({round(model.coef_[0], 6)}) + 
+            "\\text{¢}\ X_i \ \\text{(Months)}$")
+
+for i in range(1,50):
+    if model.intercept_ + model.coef_ * (12 * i) > (model.intercept_  * 2):
+        st.markdown("###### On average the cost of electricity doubles every " + str(i) + " years")
+        break
+
 st.markdown("And that's not all, you find some of the influential economists in the US predicting this price to grow to **$7.00** a gallon by end of year! So, you keep doing some research and find some interesting statistics that will help you know the average cost of owning a traditional fuel propelled car.")
 st.markdown("")
 

@@ -59,7 +59,7 @@ st.markdown("###### $ \hat{Y}_i \ \\text{(Estimated kWh Cost)}\ = "
 
 for i in range(1,50):
     if model.intercept_ + model.coef_ * (12 * i) > (model.intercept_  * 2):
-        st.markdown("###### On average the cost of electricity doubles every " + str(i) + " years")
+        st.markdown("###### According to the model the cost of electricity will  1x the original cost every " + str(i) + " years")
         break
     
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #

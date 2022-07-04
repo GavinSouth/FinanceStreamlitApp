@@ -79,6 +79,7 @@ col2.metric("Fuel Type", "Electricity", delta_color="off")
 col3.metric("Fuel Economy", "32 kWh", delta_color="off")
 col4.metric("Annual Cost for Power", "$707", delta_color="off")
 
-
 image = Image.open('photos/lifetime_electric.png')
 st.image(image)
+
+st.markdown("It's obviously shocking to see the difference in cost over time. Between an average small sedan and a large electric vehicle we are seeing a quarter of the cost to run it in an average ownership worth of time. It's fair to assume that electric vehicles cost more than fuel powered vehicles, but you'd see surprised, the market is starting to catch up and many cars are comparible in cost. Next you actually look at whats currently available and look at the cost between all these different models.")

@@ -68,7 +68,6 @@ x = gas_prices['index'].values.reshape(-1, 1)
 y = gas_prices['Gasoline Price ($/gallon)'].values
 model = LinearRegression().fit(x, y)
 
-model.intercept_ * 2
 # model.coef_
 #model.intercept_ + model.coef_ 
 

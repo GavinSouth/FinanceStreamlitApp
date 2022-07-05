@@ -12,6 +12,14 @@ st.markdown("The electric car market is starting be much more fleshed out. Most 
 car_data = pd.read_excel('Data/electric_car_market.xlsx')
 #st.dataframe(car_data.style.highlight_max(axis=0))
 
+class fuel_stats: 
+    avg_annual_miles = 14263
+    avg_length_of_ownership = 8.4
+    current_diesel = 5.718
+    current_regular = 5.006
+    current_mid = 5.455
+    current_premium = 5.762
+
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
 st.sidebar.markdown("## EV Models")
 
@@ -65,20 +73,27 @@ def plot_specs(_Y):
     st.altair_chart(d, use_container_width=True)
 plot_specs(Y)
 
-st.dataframe(car_data.style.highlight_max(axis=0))
-
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
 st.markdown("# Fuel Comparable Model")
 
 st.markdown("## " + selected.iloc[0]['Comparable_fuel_model'])
 
-st.image(Image.open('photos/car_photos/' + selected_model + '.jpeg'))
+st.image(Image.open('photos/car_photos/' + selected.iloc[0]['Comparable_fuel_model'] + '.jpeg'))
 
 col1, col2, col3, col4= st.columns(4)
-col1.metric("MSRP", '$' + str(selected.iloc[0]['msrp_fuel']), delta_color="off")
-col2.metric("Max HP", str(selected.iloc[0]['max_hp_fuel']) + ' hp', delta_color="off")
-if  selected.iloc[0]['range_miles_fuel'] > 0:
-    col3.metric("Range", str(round(selected.iloc[0]['range_miles_fuel'])) + ' miles', delta_color="off")
+col1.metric("MSRP",
+            '$' + str(selected.iloc[0]['msrp_fuel']),
+            'Equally Priced',
+            delta_color="off")
+col2.metric("Max HP", 
+            str(selected.iloc[0]['max_hp_fuel']) + ' hp', 
+            str(selected.iloc[0]['max_hp_fuel'] - selected.iloc[0]['max_hp']) + ' hp', 
+            delta_color="normal")
+if selected.iloc[0]['range_miles_fuel'] > 0 and selected.iloc[0]['range_miles'] > 0:
+    col3.metric("Range", 
+                str(round(selected.iloc[0]['range_miles_fuel'])) + ' miles',
+                str(round(selected.iloc[0]['range_miles_fuel']) - round(selected.iloc[0]['range_miles'])) + ' miles', 
+                delta_color="normal")
 else:
     col3.metric("Range", 'TBD', delta_color="off")
 col4.metric("Fuel Type", str(selected.iloc[0]['fuel_type']), delta_color="off")

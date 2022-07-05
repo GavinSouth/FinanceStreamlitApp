@@ -6,8 +6,8 @@ from PIL import Image
 import streamlit as st 
 from sklearn.linear_model import LinearRegression
 
-st.markdown("## Thats a stark contrast...")
-st.markdown("### So now,")
+st.markdown("# That's a stark contrast...")
+st.markdown("## So now,")
 st.markdown(" you walk across the street to talk to your neighbor that has that new shiny electric car to ask her a couple of questions. You knock on the door and no one answers, as you walk down their entryway their garage door opens and you catch her unplugging their car from the wall. You are obviously impressed and jealous of the ease of recharging her car. You belt out, 'wow, nice car! Must be rough on your electric bill though.' They respond, 'yeah thanks! It's really fun to own, surprisingly its not that expensive to keep around.' Now your really curious. 'How much does it actually cost to charge then? I'm considering getting one myself', you reply. She smiles and begin to explain the breakdown...")
 
 image = Image.open('photos/electric_station.png')
@@ -16,9 +16,9 @@ st.image(image)
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
 st.markdown("### She explains,")
 
-st.markdown(" > First of all, the cost of charging an electric car is variable. Gas prices are posted and change day to day, and outside the average variance there is little variation. Not so much the case with the cost of electricity. The cost of electricity will change depending on when and where you decide to charge it.  **That being said the cheapest way to charge an electric car is to install a home charging station and charge through the middle of night when power cost is the lowest.**")
+st.markdown(" > First of all, the cost of charging an electric car is variable. Gas prices are posted and change day to day, and outside the average cost there is little variation. Not so much the case with the cost of electricity. The cost of electricity for an EV will change depending on when and where you decide to charge it.  **That being said the cheapest way to charge an electric car is to install a home charging station and charge through the middle of night when power cost is the lowest.**")
 
-st.markdown(" > The next thing you need to understand is the metric used to calculate the cost of opperating an electric vehicle in regards to economy. When shopping for or considering a gasoline-powered car you will analyze the MPG it gets as the metric for overall cost of the car. You mention that you found the that metric and cost for your own can and understand the conversion and cost. The metric used for electric cars in the same way is actually kilowatt-hours per 100 miles which is posted on all new electric cars right on their specifications. So, **to figure out your cost of charging at home, multiply your vehicle's kWh/100 miles figure by the electricity rate — the cost per kWh — for the time of day you'll most often be charging (more about that in a minute). That figure will tell you the cost per 100 miles.**")
+st.markdown(" > The next thing you need to understand is the metric used to calculate the cost of opperating an electric vehicle in regards to economy. When shopping for or considering a gasoline-powered car you will analyze the MPG it gets as the metric for overall cost of the car. You mention that you found the that metric and cost for your own can and understand the conversion and cost. The metric used for electric cars in the same way is actually kilowatt-hours per 100 miles which is posted on all new electric cars right on their specifications. So, **to figure out your cost of charging at home, multiply your vehicle's kWh/100 miles figure by the electricity rate — the cost per kWh — for the time of day you'll most often be charging (more about that in a minute). That figure will tell you the cost per 100 miles.** There are obviously a lot more variation in the cost of electricity, but you can figure the cost the charge an EV just using averages like you did with the gasoline powered vehicles.")
 
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
 st.markdown("##### For brevity lets hypothetically consider some kWh averages...")
@@ -48,7 +48,7 @@ model = LinearRegression().fit(x, y)
 # model.coef_
 #model.intercept_ + model.coef_ * 365
 
-st.markdown(" Considering the values from your charts, running a linear regression doesn't seems like a logical approach to predicting future costs of both gasoline and electricity. You find the following models:")
+st.markdown(" You plot the cost of electricity over time and considering the values from your chart, you run a linear regression model to see how much these costs change on average. You find the following model:")
 
 st.markdown("**Average electric cost change with time series regression model:**")
 st.markdown("###### $ \hat{Y}_i \ \\text{(Estimated kWh Cost)}\ = " 

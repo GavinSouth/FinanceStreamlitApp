@@ -30,7 +30,6 @@ selected_model = st.sidebar.select_slider(
 selected = car_data[car_data['2022_ev_model'] == selected_model]
 
 st.markdown("## " + selected_model)
-
 st.image(Image.open('photos/car_photos/' + selected_model + '.jpeg'))
 
 col1, col2, col3, col4= st.columns(4)
@@ -75,7 +74,6 @@ plot_specs(Y)
 
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
 st.markdown("# Fuel Comparable Model")
-
 st.markdown("## " + selected.iloc[0]['Comparable_fuel_model'])
 
 st.image(Image.open('photos/car_photos/' + selected.iloc[0]['Comparable_fuel_model'] + '.jpeg'))

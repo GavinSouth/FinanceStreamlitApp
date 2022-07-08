@@ -24,3 +24,4 @@
 # https://www.edmunds.com/fuel-economy/the-true-cost-of-powering-an-electric-car.html
 # https://arstechnica.com/cars/2022/04/the-hummer-ev-is-an-electric-truck-for-people-who-think-evs-are-stupid/#:~:text=The%20official%20EPA%20efficiency%20figures,41%20kWh%2F100%20km).
 # https://www.edmunds.com/car-news/tested-2022-audi-e-tron-gt-beats-epa-range-by-53-miles.html
+# https://www.visualcapitalist.com/visualizing-all-electric-car-models-available-in-the-us/

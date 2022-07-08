@@ -15,6 +15,7 @@ car_data = pd.read_excel('Data/electric_car_market.xlsx')
 class fuel_stats: 
     avg_annual_miles = 14263
     avg_length_of_ownership = 8.4
+    current_electric = 0.154
     current_diesel = 5.718
     current_regular = 5.006
     current_mid = 5.455
@@ -77,6 +78,14 @@ def plot_specs(_Y):
     st.altair_chart(d, use_container_width=True)
 plot_specs(Y)
 
+alt.Chart(data).mark_point(
+    filled=True,
+    size=100
+).encode(
+    x='x',
+    color=alt.Color('color', scale=None)
+)
+
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
 st.markdown("# Fuel Comparable Model")
 st.markdown("To compare apples to apples as best as possible it seems like a useful comparison to look at vehicles that **cost the same as an electric model**. Seeing this comparison may make an even stronger case for the possible fuel savings over time. But, as you may see, this isn't the entire story. Some of the electric cars may have a lot less power and range compared to their gasoline cost equivilents. These trade-offs are variables to consider if you plan on going with an EV.")
@@ -125,30 +134,41 @@ plot_specs(Y2)
 
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
 st.markdown("# Anticipated cost comparison:")
-st.markdown("#### Selected EV")
-col1, col2= st.columns(2)
-col1.metric("Lifetime Fuel Cost",
+st.markdown("#### Electric Powered: " + selected_model)
+col1, col2, col3 = st.columns(3)
+col1.metric('EV MSRP', 
+           '$' + (selected.iloc[0]['msrp']).astype(str),
+           delta_color="off")
+col2.metric("Lifetime Electricity Cost",
+            "$" +
+            round((((fuel_stats.avg_annual_miles *  fuel_stats.avg_length_of_ownership) / 100) * selected.iloc[0]['kWh']) * fuel_stats.current_electric, 2).astype(str),
+            delta_color="off")
+col3.metric("Total Cost of Ownership", 
+            "$" + 
+            round((((fuel_stats.avg_annual_miles *  fuel_stats.avg_length_of_ownership) / 100) * selected.iloc[0]['kWh']) * fuel_stats.current_electric + (selected.iloc[0]['msrp']), 2).astype(str),
+            delta_color="off")
+
+st.markdown("#### Gas Powered: " + selected.iloc[0]['Comparable_fuel_model'])
+col1, col2, col3 = st.columns(3)
+col1.metric('Fuel MSRP', 
+           '$' + (selected.iloc[0]['msrp_fuel']).astype(str),
+           delta_color="off")
+col2.metric("Lifetime Fuel Cost",
             "$" +
             round((((fuel_stats.avg_annual_miles / selected.iloc[0]['fuel_economy_fuel'])) * fuel_stats.current_premium) * fuel_stats.avg_length_of_ownership, 2).astype(str),
             delta_color="off")
-col2.metric("Total Cost of Ownership", 
-             "$" + round((((fuel_stats.avg_annual_miles / selected.iloc[0]['fuel_economy_fuel'])) * fuel_stats.current_premium) * fuel_stats.avg_length_of_ownership + (selected.iloc[0]['msrp_fuel']), 2).astype(str),
-            delta_color="off")
+col3.metric("Total Cost of Ownership", 
+            "$" + round((((fuel_stats.avg_annual_miles / selected.iloc[0]['fuel_economy_fuel'])) * fuel_stats.current_premium) * fuel_stats.avg_length_of_ownership +(selected.iloc[0]['msrp_fuel']), 2).astype(str),
+            '$' + round(round((((fuel_stats.avg_annual_miles / selected.iloc[0]['fuel_economy_fuel'])) * fuel_stats.current_premium) * fuel_stats.avg_length_of_ownership + (selected.iloc[0]['msrp_fuel']), 2) - round((((fuel_stats.avg_annual_miles *  fuel_stats.avg_length_of_ownership) / 100) * selected.iloc[0]['kWh']) * fuel_stats.current_electric + (selected.iloc[0]['msrp']), 2), 2).astype(str),
+            delta_color='off')
 
-st.markdown("#### Selected Gas Equivilent")
-col1, col2= st.columns(2)
-col1.metric("Lifetime Fuel Cost",
-            "$" +
-            round((((fuel_stats.avg_annual_miles / selected.iloc[0]['fuel_economy_fuel'])) * fuel_stats.current_premium) * fuel_stats.avg_length_of_ownership, 2).astype(str),
-            delta_color="off")
-col2.metric("Total Cost of Ownership", 
-             "$" + round((((fuel_stats.avg_annual_miles / selected.iloc[0]['fuel_economy_fuel'])) * fuel_stats.current_premium) * fuel_stats.avg_length_of_ownership + (selected.iloc[0]['msrp_fuel']), 2).astype(str),
-            delta_color="off")
+st.markdown("Comparing both of these vehicles side by side and looking at an estimated overall cost, the estimated savings of the **" + 
+            selected_model + 
+            '** over the **' + 
+            selected.iloc[0]['Comparable_fuel_model'] + 
+            '** is:')
 
-
-
-
-
+st.markdown("### $" + round(round((((fuel_stats.avg_annual_miles / selected.iloc[0]['fuel_economy_fuel'])) * fuel_stats.current_premium) * fuel_stats.avg_length_of_ownership + (selected.iloc[0]['msrp_fuel']), 2) - round((((fuel_stats.avg_annual_miles *  fuel_stats.avg_length_of_ownership) / 100) * selected.iloc[0]['kWh']) * fuel_stats.current_electric + (selected.iloc[0]['msrp']), 2), 2).astype(str))
 
 
 # Further more within the electric car market some are even more fuel efficient than others.

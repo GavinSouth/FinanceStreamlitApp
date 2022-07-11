@@ -55,7 +55,7 @@ st.markdown("> Saving the planet, saving fuel, saving money its what's important
 st.markdown("")
 st.markdown("")
 st.markdown("# Ultimately,")
-st.markdown("### You have the choice, you can have cheap and fun transportation thats good around town. Or expensive but convienent transportation that will take you the distance. Thats the big distinction. Both are good in their own rights, but you have decided after your research that an electric car is the way to go. The cost savings and the future proofing that comes with electric cars is just unparallel! It will well be worth the cost, especially over time. Now, is the tricky part, picking out the model you like the most.")
+st.markdown("#### You have the choice, you can have cheap and fun transportation thats good around town. Or, expensive but convienent transportation that will take you the distance. Thats the big distinction. Both are good in their own rights, but you have decided after your research that an electric car is the way to go. The cost savings and the future proofing that comes with electric cars is just unparallel! It will well be worth the cost, especially over time. Now, is the tricky part, picking out the model you like the most.")
 
 st.markdown("")
 st.markdown("")

@@ -23,7 +23,7 @@ class fuel_stats:
 
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
 st.markdown("## Right now,")
-st.markdown(" you're currently standing at a gas pump; card swiped, nozzle in hand, you wince as you select the grade of fuel for your car. How frustrated and confused are you seeing the cost of gas right now? You must think this is out of control as gas was 25¢ chaper like three days ago! It's especially frustrating because you know you have no control over the situation.")
+st.markdown(" you're currently standing at a gas pump; card swiped, nozzle in hand, you wince as you select the grade of fuel for your car. How frustrated and confused are you seeing the cost of gas right now? You must think this is out of control as gas was 25¢ cheaper like three days ago! It's especially frustrating because you know you have no control over the situation.")
 
 image = Image.open('photos/gas_pump_slim.png')
 st.image(image, caption='Gas prices as of June 18, 2022 https://www.eia.gov/dnav/pet/pet_pri_gnd_dcus_nus_w.htm')
@@ -34,8 +34,8 @@ col2.metric("Regular", "$" + str(fuel_stats.current_regular), str(int((fuel_stat
 col3.metric("Mid-grade", "$" + str(fuel_stats.current_mid), str(int((fuel_stats.current_mid / 3.432) * 100)) + '% since 2021', delta_color="off")
 col4.metric("Premium", "$" + str(fuel_stats.current_premium), str(int((fuel_stats.current_premium / 3.687) * 100)) + '% since 2021', delta_color="off")
 
-st.markdown("These are the current diesel and gas prices right now. You may start to feel bad for anyone driving a one-ton diesel truck! But, you still have to deal with this burden of an out of control rise in cost, you don't have a choice as you need to commute to work and to your other resposibilities.") 
-st.markdown("But, maybe there is something you can do about this unfortuante dillema. You consider, on the way home from the station some different ways you could start saving money at the pump... You think: Maybe, I could start riding my bike everywhere! No thanks. Maybe, carpooling with the neighbor! But, that sounds like a logistical nightmare. But then, you start thinking about your neigbors shiny new electric vehicle they keep raving about. You've been thinking about an upgrade for a while now, maybe this is a good time to see whats available out there and seriously consider getting one.")
+st.markdown("These are the current diesel and gas prices right now. You may start to feel bad for anyone driving a one-ton diesel truck! But, you still have to deal with this burden of an out of control rise in cost, you don't have a choice as you need to commute to work and to your other responsibilities.") 
+st.markdown("But, maybe there is something you can do about this unfortunate dilemma. You consider, on the way home from the station some different ways you could start saving money at the pump... You think: Maybe, I could start riding my bike everywhere! No thanks. Maybe, carpooling with the neighbor! But, that sounds like a logistical nightmare. But then, you start thinking about your neighbors shiny new electric vehicle they keep raving about. You've been thinking about an upgrade for a while now, maybe this is a good time to see whats available out there and seriously consider getting one.")
 st.markdown("")
 
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #

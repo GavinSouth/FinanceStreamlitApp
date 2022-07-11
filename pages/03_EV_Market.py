@@ -80,7 +80,7 @@ plot_specs(Y)
 
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
 st.markdown("# Fuel Comparable Model")
-st.markdown("To compare apples to apples as best as possible it seems like a useful comparison to look at vehicles that **cost the same as an electric model**. Seeing this comparison may make an even stronger case for the possible fuel savings over time. But, as you may see, this isn't the entire story. Some of the electric cars may have a lot less power and range compared to their gasoline cost equivilents. These trade-offs are variables to consider if you plan on going with an EV.")
+st.markdown("To compare apples to apples as best as possible it seems like a useful comparison to look at vehicles that **cost the same as an electric model**. Seeing this comparison may make an even stronger case for the possible fuel savings over time. But, as you may see, this isn't the entire story. Some of the electric cars may have a lot less power and range compared to their gasoline cost equivalents. These trade-offs are variables to consider if you plan on going with an EV.")
 
 st.markdown("## " + selected.iloc[0]['Comparable_fuel_model'])
 st.image(Image.open('photos/car_photos/' + selected.iloc[0]['Comparable_fuel_model'] + '.jpeg'))

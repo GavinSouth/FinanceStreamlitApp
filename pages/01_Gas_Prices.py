@@ -35,7 +35,7 @@ col3.metric("Mid-grade", "$" + str(fuel_stats.current_mid), str(int((fuel_stats.
 col4.metric("Premium", "$" + str(fuel_stats.current_premium), str(int((fuel_stats.current_premium / 3.687) * 100)) + '% since 2021', delta_color="off")
 
 st.markdown("These are the current diesel and gas prices right now. You may start to feel bad for anyone driving a one-ton diesel truck! But, you still have to deal with this burden of an out of control rise in cost, you don't have a choice as you need to commute to work and to your other responsibilities.") 
-st.markdown("But, maybe there is something you can do about this unfortunate dilemma. You consider, on the way home from the station some different ways you could start saving money at the pump... You think: Maybe, I could start riding my bike everywhere! No thanks. Maybe, carpooling with the neighbor! But, that sounds like a logistical nightmare. But then, you start thinking about your neighbors shiny new electric vehicle they keep raving about. You've been thinking about an upgrade for a while now, maybe this is a good time to see whats available out there and seriously consider getting one.")
+st.markdown("But, maybe there is something you can do about this unfortunate dilemma. You consider, on the way home from the station some different ways you could start saving money at the pump... You think: Maybe, I could start riding my bike everywhere! No thanks. Maybe, carpooling with the neighbor! But, that sounds like a logistical nightmare. But then, you start thinking about your neighbors shiny new electric vehicle they keep raving about. That must be much cheaper! Besides, you've been thinking about an upgrade for a while now, maybe this is a good time to see whats available out there and seriously consider getting one.")
 st.markdown("")
 
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
@@ -85,7 +85,7 @@ for i in range(1,50):
         st.markdown("###### According to the model the cost of gasoline is 1x the original cost every " + str(i) + " years")
         break
 
-st.markdown("And that's not all, you find after doing some more research that some of the most influential economists in the US are predicting the price to grow to **$7.00** a gallon by end of year!. But now you need benchmark to compare a traditional fuel propelled vehicle to an EV. To gain insight some simple summary statistics could be all you need.")
+st.markdown("And that's not all, you find after doing some more research that some of the most influential economists in the US are predicting the price to grow to **$7.00** a gallon by end of year! But, now you need benchmark to compare a traditional fuel propelled vehicle to an EV. To gain insight some simple summary statistics could be all you need.")
 st.markdown("")
 
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
@@ -137,7 +137,7 @@ a = a+b+c+d
 a = a.configure_view(strokeWidth=0).configure_axis(grid=False, domain=False)
 st.altair_chart(a, use_container_width=True)
 
-st.markdown("Your car that you currently own is sitting happily as the red dot in the bottom portion of the chart. This average along with the other stats discovered will now allow you to run some basic mathematics on the data to compare and contrast your own long term fuel cost against an electric alternative.")
+st.markdown("Your personal car is sitting happily as the red dot in the bottom portion of the chart. This average along with the other stats discovered will now allow you to run some basic mathematics on the data to compare and contrast your own long term fuel cost against an electric alternative.")
 
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
 st.markdown("## Crunching the numbers,")
@@ -171,4 +171,4 @@ col4.metric("Annual Cost for Fuel", "$2,950.44", delta_color="off")
 image = Image.open('photos/personal_car_cost.png')
 st.image(image)
 
-st.markdown("With a short analysis done, and a benchmark to beat, you decide to explore the similar stats to an EV to see the cost difference over time.")
+st.markdown("With a short analysis done, and a benchmark to beat, you can now explore and compare an EV to your car to see the cost difference over time.")

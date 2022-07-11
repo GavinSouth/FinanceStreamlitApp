@@ -7,7 +7,7 @@ import streamlit as st
 
 st.markdown("# Comparing Available Electric Cars")
 
-st.markdown("The electric car market in 2022 is much more fleshed out than previous years. Most manufacturer conglomerates have at least one EV offering and many are on the verge of committing to an all electric range of vehicles. That being said below is a comparison of most of the current electric cars offered in 2022. Their cost and specs range vastly, but seeing the whole picture will help making a decision much easier.")
+st.markdown("The electric car market in 2022 is much more fleshed than the past. Most automobile manufacturer conglomerates have at least one EV offering and many are on the verge of committing to an all electric range of vehicles. That being said below is a comparison of most of the current electric cars offered in 2022. Their cost and specs range vastly, but seeing the whole picture will help making a decision much easier.")
 
 car_data = pd.read_excel('Data/electric_car_market.xlsx')
 #st.dataframe(car_data.style.highlight_max(axis=0))
@@ -163,7 +163,7 @@ st.markdown("Comparing both of these vehicles side by side and looking at an est
 st.markdown("### $" + round(round((((fuel_stats.avg_annual_miles / selected.iloc[0]['fuel_economy_fuel'])) * fuel_stats.current_premium) * fuel_stats.avg_length_of_ownership + (selected.iloc[0]['msrp_fuel']), 2) - round((((fuel_stats.avg_annual_miles *  fuel_stats.avg_length_of_ownership) / 100) * selected.iloc[0]['kWh']) * fuel_stats.current_electric + (selected.iloc[0]['msrp']), 2), 2).astype(str))
 
 st.markdown("")
-st.markdown("Out of all the electric vehicles on the market right now, there are still some that are more efficent than others. The **" + selected_model + "** falls here compared to the rest of the EVs. Note: The higher the kWh/100 mile rating the less efficient it is. That being said if your goal is to save the most money possible and use less resources, consider some of the ones on the right side of the chart. ")
+st.markdown("Out of all the electric vehicles on the market right now, there are still some that are more efficient than others. The **" + selected_model + "** falls here compared to the rest of the EVs. Note: The higher the kWh/100 mile rating the less efficient it is. That being said if your goal is to save the most money possible and use less resources, consider some of the ones on the right side of the chart. ")
 st.markdown("")
 
 c = alt.Chart(car_data).mark_point(filled=True, size=100, color = 'lightgrey').encode(

@@ -5,7 +5,7 @@ from PIL import Image
 from sqlalchemy import null
 import streamlit as st 
 
-st.markdown("# Comparing Available Electric Cars on the Market")
+st.markdown("# Comparing Available Electric Cars")
 
 st.markdown("The electric car market in 2022 is much more fleshed out than previous years. Most manufacturer conglomerates have at least one EV offering and many are on the verge of committing to an all electric range of vehicles. That being said below is a comparison of most of the current electric cars offered in 2022. Their cost and specs range vastly, but seeing the whole picture will help making a decision much easier.")
 
@@ -77,14 +77,6 @@ def plot_specs(_Y):
     d = d.configure_view(strokeWidth=0).configure_axis(grid=False, domain=False)
     st.altair_chart(d, use_container_width=True)
 plot_specs(Y)
-
-alt.Chart(data).mark_point(
-    filled=True,
-    size=100
-).encode(
-    x='x',
-    color=alt.Color('color', scale=None)
-)
 
 # ———————————————————————————————————————————————————————————————————————————————————————————————— #
 st.markdown("# Fuel Comparable Model")
@@ -170,5 +162,20 @@ st.markdown("Comparing both of these vehicles side by side and looking at an est
 
 st.markdown("### $" + round(round((((fuel_stats.avg_annual_miles / selected.iloc[0]['fuel_economy_fuel'])) * fuel_stats.current_premium) * fuel_stats.avg_length_of_ownership + (selected.iloc[0]['msrp_fuel']), 2) - round((((fuel_stats.avg_annual_miles *  fuel_stats.avg_length_of_ownership) / 100) * selected.iloc[0]['kWh']) * fuel_stats.current_electric + (selected.iloc[0]['msrp']), 2), 2).astype(str))
 
+st.markdown("")
+st.markdown("Out of all the electric vehicles on the market right now, there are still some that are more efficent than others. The **" + selected_model + "** falls here compared to the rest of the EVs. Note: The higher the kWh/100 mile rating the less efficient it is. That being said if your goal is to save the most money possible and use less resources, consider some of the ones on the right side of the chart. ")
+st.markdown("")
 
-# Further more within the electric car market some are even more fuel efficient than others.
+c = alt.Chart(car_data).mark_point(filled=True, size=100, color = 'lightgrey').encode(
+    x = alt.X('kWh', scale=alt.Scale(reverse=True)),
+    tooltip=['2022_ev_model', 'kWh', 'msrp', 'range_miles']
+    ).properties(width=700, height=100)
+b = alt.Chart(selected).mark_point(filled=True, size=200, color = 'red').encode(
+    x = alt.X('kWh', scale=alt.Scale(reverse=True)),
+    tooltip=['2022_ev_model', 'kWh', 'msrp', 'range_miles']
+    ).properties(width=700, height=100)
+d = c + b
+d = d.configure_view(strokeWidth=0).configure_axis(grid=False, domain=False)
+st.altair_chart(d, use_container_width=True)
+
+st.markdown("**Note:** Some manufacturers have better tech than others in this space. Tesla, for example, has been improving and polishing it's evs for years and as such many of there models are more efficient, powerful, and reasonably priced. Another car company that has made some impressive strides is General Motors with their Ultium battery system. It's so modular and solid that other companies, like Honda Mtrs. is joining GM to build their electric vehicles on their platform. Be aware of these differences as you prepare to grab a new ev, they can make a large difference in the long run.")
